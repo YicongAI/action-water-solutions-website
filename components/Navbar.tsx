@@ -107,7 +107,7 @@ export default function Navbar() {
           className="group flex shrink-0 items-center gap-2.5 text-[#092a45] xl:gap-3"
         >
           <Image
-            src="/logo/action-logo.png"
+            src="/logo/aks-logo.png"
             alt="ACTION Water Solutions logo"
             width={48}
             height={48}

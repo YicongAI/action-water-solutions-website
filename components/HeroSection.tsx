@@ -130,7 +130,7 @@ export default function HeroSection() {
         className="absolute bottom-7 right-7 z-20 hidden items-center gap-3 lg:flex xl:bottom-9 xl:right-10"
       >
         <Image
-          src="/logo/action-logo.png"
+          src="/logo/aks-logo.png"
           alt="ACTION Water Solutions"
           width={48}
           height={48}
