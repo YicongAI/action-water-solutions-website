@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import SolutionsSection from "@/components/SolutionsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import GlobalPresenceSection from "@/components/GlobalPresenceSection";
+import ProductSystemsSection from "@/components/ProductSystemsSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <SolutionsSection />
       <ProjectsSection />
       <GlobalPresenceSection />
+      <ProductSystemsSection />
       <section id="contact" className="min-h-screen bg-white p-20">
         <h2 className="text-4xl font-semibold text-slate-900">
           Contact Placeholder
