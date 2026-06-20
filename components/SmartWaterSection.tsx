@@ -2,16 +2,14 @@
 
 import { motion } from "framer-motion";
 import {
-  Activity,
-  BellRing,
+  ArrowDown,
   BrainCircuit,
-  Droplets,
-  Gauge,
+  Cloud,
+  Factory,
   MonitorCog,
   Network,
-  ShieldCheck,
+  RadioTower,
   Wrench,
-  Zap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -48,34 +46,31 @@ const capabilities: Capability[] = [
   },
 ];
 
-const metrics = [
+const architectureNodes = [
   {
-    label: "Flow Rate",
-    value: "2,480",
-    unit: "m³/h",
-    status: "Stable",
-    icon: Droplets,
+    title: "Water Plant",
+    description: "On-site treatment infrastructure",
+    icon: Factory,
   },
   {
-    label: "Water Quality",
-    value: "Within",
-    unit: "target",
-    status: "Normal",
-    icon: ShieldCheck,
+    title: "Sensors",
+    description: "Equipment and water quality signals",
+    icon: RadioTower,
   },
   {
-    label: "Equipment Health",
-    value: "96",
-    unit: "%",
-    status: "Optimal",
-    icon: Activity,
+    title: "Cloud Platform",
+    description: "Secure data collection and integration",
+    icon: Cloud,
   },
   {
-    label: "Energy Efficiency",
-    value: "+12",
-    unit: "%",
-    status: "Illustrative",
-    icon: Zap,
+    title: "AI Analysis",
+    description: "Prediction and decision support models",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Operation Center",
+    description: "Monitoring and intelligent operations",
+    icon: MonitorCog,
   },
 ];
 
@@ -170,109 +165,87 @@ export default function SmartWaterSection() {
             <div className="relative overflow-hidden rounded-[1.75rem] border border-cyan-300/20 bg-[#082942]/90 p-3 shadow-[0_35px_90px_rgba(0,0,0,0.35),0_0_50px_rgba(34,211,238,0.08)] backdrop-blur-md sm:p-4">
               <div className="overflow-hidden rounded-[1.25rem] border border-white/10 bg-[#041a2c]">
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-4 sm:px-6">
-                  <div className="flex items-center gap-3">
-                    <span className="flex size-9 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-300">
-                      <Gauge size={18} strokeWidth={1.7} />
-                    </span>
-                    <div>
-                      <div className="text-xs font-semibold">
-                        Water Operations Center
-                      </div>
-                      <div className="mt-0.5 text-[8px] font-bold uppercase tracking-[0.16em] text-slate-500">
-                        Next-generation platform concept
-                      </div>
+                  <div>
+                    <div className="text-xs font-semibold">
+                      Smart Water Capability Framework
+                    </div>
+                    <div className="mt-1 text-[8px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                      Infrastructure to intelligent operations
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 rounded-full border border-emerald-300/15 bg-emerald-400/[0.07] px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.14em] text-emerald-300">
-                    <span className="size-1.5 rounded-full bg-emerald-400" />
-                    Interface Preview
+                  <div className="rounded-full border border-cyan-300/15 bg-cyan-400/[0.07] px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.14em] text-cyan-300">
+                    Architecture Model
                   </div>
                 </div>
 
-                <div className="grid gap-3 p-4 sm:grid-cols-2 sm:p-5">
-                  {metrics.map((metric) => {
-                    const Icon = metric.icon;
+                <div className="relative px-4 py-7 sm:px-8 sm:py-8">
+                  <div className="pointer-events-none absolute bottom-12 left-1/2 top-12 w-px -translate-x-1/2 bg-gradient-to-b from-cyan-400/15 via-cyan-400/50 to-cyan-400/15" />
 
-                    return (
-                      <div
-                        key={metric.label}
-                        className="rounded-xl border border-white/[0.08] bg-white/[0.035] p-4"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                            {metric.label}
-                          </span>
-                          <Icon size={15} className="text-cyan-400" strokeWidth={1.7} />
-                        </div>
-                        <div className="mt-4 flex items-end gap-1.5">
-                          <span className="text-2xl font-semibold tracking-[-0.04em] text-white">
-                            {metric.value}
-                          </span>
-                          <span className="pb-1 text-[9px] font-bold uppercase tracking-[0.1em] text-cyan-300">
-                            {metric.unit}
-                          </span>
-                        </div>
-                        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/[0.07]">
-                          <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-cyan-500 to-cyan-300" />
-                        </div>
-                        <div className="mt-2 text-[8px] uppercase tracking-[0.12em] text-slate-500">
-                          {metric.status}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                  <div className="relative mx-auto max-w-lg">
+                    {architectureNodes.map((node, index) => {
+                      const Icon = node.icon;
 
-                <div className="grid gap-3 border-t border-white/10 p-4 sm:grid-cols-[1.45fr_0.55fr] sm:p-5">
-                  <div className="rounded-xl border border-white/[0.08] bg-white/[0.035] p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                          Operational Trend
-                        </div>
-                        <div className="mt-1 text-[8px] text-slate-600">
-                          Illustrative 24-hour system profile
-                        </div>
-                      </div>
-                      <Activity size={15} className="text-cyan-400" />
-                    </div>
-                    <div className="mt-5 flex h-24 items-end gap-2">
-                      {[42, 54, 49, 66, 61, 75, 69, 84, 72, 88, 79, 91].map(
-                        (height, index) => (
-                          <div
-                            key={`${height}-${index}`}
-                            className="flex-1 rounded-t-sm bg-gradient-to-t from-cyan-700/30 to-cyan-400/80"
-                            style={{ height: `${height}%` }}
-                          />
-                        ),
-                      )}
-                    </div>
-                  </div>
+                      return (
+                        <div key={node.title}>
+                          <motion.div
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.5,
+                              delay: 0.18 + index * 0.1,
+                            }}
+                            className={`relative z-10 flex items-center gap-4 rounded-2xl border bg-[#082942]/95 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-5 ${
+                              index === architectureNodes.length - 1
+                                ? "border-cyan-300/35 shadow-[0_18px_50px_rgba(34,211,238,0.1)]"
+                                : "border-white/10"
+                            }`}
+                          >
+                            <span className="relative flex size-11 shrink-0 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-400/10 text-cyan-300">
+                              <motion.span
+                                animate={{ opacity: [0.25, 0.6, 0.25], scale: [1, 1.18, 1] }}
+                                transition={{
+                                  duration: 2.8,
+                                  repeat: Infinity,
+                                  delay: index * 0.25,
+                                }}
+                                className="absolute inset-0 rounded-xl bg-cyan-400/10"
+                              />
+                              <Icon
+                                size={20}
+                                strokeWidth={1.6}
+                                className="relative"
+                              />
+                            </span>
+                            <div className="min-w-0">
+                              <div className="text-[9px] font-bold uppercase tracking-[0.17em] text-cyan-400/70">
+                                Stage 0{index + 1}
+                              </div>
+                              <h3 className="mt-1 text-sm font-semibold tracking-[-0.01em] text-white sm:text-base">
+                                {node.title}
+                              </h3>
+                              <p className="mt-1 text-[10px] leading-5 text-slate-400 sm:text-xs">
+                                {node.description}
+                              </p>
+                            </div>
+                          </motion.div>
 
-                  <div className="flex flex-col justify-between rounded-xl border border-white/[0.08] bg-white/[0.035] p-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400">
-                        Alert Status
-                      </span>
-                      <BellRing size={15} className="text-cyan-400" />
-                    </div>
-                    <div className="py-5">
-                      <div className="text-3xl font-semibold tracking-[-0.04em]">
-                        0
-                      </div>
-                      <div className="mt-1 text-[8px] uppercase tracking-[0.13em] text-slate-500">
-                        Critical alerts
-                      </div>
-                    </div>
-                    <div className="rounded-lg bg-emerald-400/[0.08] px-3 py-2 text-[8px] font-bold uppercase tracking-[0.12em] text-emerald-300">
-                      Normal Status
-                    </div>
+                          {index < architectureNodes.length - 1 && (
+                            <div className="relative z-10 flex h-9 items-center justify-center">
+                              <span className="absolute h-full w-px bg-cyan-400/35" />
+                              <span className="relative flex size-5 items-center justify-center rounded-full border border-cyan-300/20 bg-[#061f34] text-cyan-400">
+                                <ArrowDown size={11} strokeWidth={1.8} />
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
-                <div className="border-t border-white/10 px-5 py-3 text-[8px] leading-4 text-slate-600 sm:px-6">
-                  Illustrative interface for developing smart water capabilities.
-                  Metrics shown are placeholders and do not represent live operations.
+                <div className="border-t border-white/10 px-5 py-4 text-center text-[9px] font-semibold uppercase tracking-[0.15em] text-slate-400 sm:px-6">
+                  From on-site infrastructure to intelligent operations.
                 </div>
               </div>
             </div>
