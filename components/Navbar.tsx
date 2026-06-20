@@ -4,68 +4,75 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { products } from "@/data/products";
+
+type NavChild = {
+  label: string;
+  href: string;
+};
 
 type NavItem = {
   label: string;
-  children?: string[];
+  dropdownTitle?: string;
+  children?: NavChild[];
 };
+
+const toHref = (label: string) =>
+  `#${label.toLowerCase().replaceAll(" & ", "-").replaceAll(" ", "-")}`;
+
+const sectionLinks = (labels: string[]): NavChild[] =>
+  labels.map((label) => ({ label, href: toHref(label) }));
 
 const navItems: NavItem[] = [
   {
     label: "Solutions",
-    children: [
+    children: sectionLinks([
       "Municipal Water Supply",
       "Rural Water Supply",
       "Wastewater Treatment",
       "Industrial Water Treatment",
       "Smart Water Solutions",
-    ],
+    ]),
   },
   {
     label: "Projects",
-    children: [
+    children: sectionLinks([
       "Municipal Projects",
       "Industrial Projects",
       "Overseas Projects",
       "Case Studies",
-    ],
+    ]),
   },
   {
     label: "Products",
-    children: [
-      "Containerized Water Plant",
-      "Integrated Treatment Systems",
-      "RO Systems",
-      "Wastewater Treatment Systems",
-      "Control Panels & Automation",
-      "Household Water Purification",
-    ],
+    dropdownTitle: "Product Systems",
+    children: products.map((product) => ({
+      label: product.name,
+      href: `/products/${product.slug}`,
+    })),
   },
   {
     label: "Smart Water",
-    children: [
+    children: sectionLinks([
       "Remote Monitoring",
       "AI Prediction",
       "Predictive Maintenance",
       "Digital Twin",
-    ],
+    ]),
   },
   {
     label: "News & Insights",
-    children: [
+    children: sectionLinks([
       "Company News",
       "Technology",
       "Patents & Innovation",
       "Leadership Activities",
       "Publications",
-    ],
+    ]),
   },
   { label: "About" },
   { label: "Contact" },
 ];
-
-const toHref = (label: string) =>
-  `#${label.toLowerCase().replaceAll(" & ", "-").replaceAll(" ", "-")}`;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -186,16 +193,16 @@ export default function Navbar() {
                     >
                       <div className="w-72 overflow-hidden rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_22px_60px_rgba(8,42,69,0.18)]">
                         <div className="mb-1 px-3 pb-2 pt-2 text-[9px] font-bold uppercase tracking-[0.22em] text-slate-400">
-                          {item.label}
+                          {item.dropdownTitle ?? item.label}
                         </div>
                         {item.children.map((child) => (
                           <a
-                            key={child}
+                            key={child.href}
                             role="menuitem"
-                            href={toHref(child)}
+                            href={child.href}
                             className="group/item flex items-center justify-between rounded-xl px-3 py-2.5 text-[13px] font-medium text-[#092a45] transition-colors duration-200 hover:bg-cyan-50 hover:text-cyan-600 focus:bg-cyan-50 focus:text-cyan-600 focus:outline-none"
                           >
-                            {child}
+                            {child.label}
                             <span className="size-1.5 rounded-full bg-cyan-400 opacity-0 transition-opacity group-hover/item:opacity-100" />
                           </a>
                         ))}
