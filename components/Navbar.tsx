@@ -36,12 +36,21 @@ const navItems: NavItem[] = [
   },
   {
     label: "Projects",
-    children: sectionLinks([
-      "Municipal Projects",
-      "Industrial Projects",
-      "Overseas Projects",
-      "Case Studies",
-    ]),
+    dropdownTitle: "Projects",
+    children: [
+      {
+        label: "Water Treatment Projects",
+        href: "/projects/water-treatment",
+      },
+      {
+        label: "Wastewater Treatment Projects",
+        href: "/projects/wastewater-treatment",
+      },
+      {
+        label: "Other Infrastructure Projects",
+        href: "/projects/other-infrastructure",
+      },
+    ],
   },
   {
     label: "Products",
