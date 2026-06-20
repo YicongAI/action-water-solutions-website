@@ -6,6 +6,7 @@ import GlobalPresenceSection from "@/components/GlobalPresenceSection";
 import ProductSystemsSection from "@/components/ProductSystemsSection";
 import SmartWaterSection from "@/components/SmartWaterSection";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <ProductSystemsSection />
       <SmartWaterSection />
       <ContactSection />
+      <Footer />
     </main>
   );
 }
