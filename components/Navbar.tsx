@@ -87,6 +87,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeMobileDropdown, setActiveMobileDropdown] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -98,6 +101,7 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -248,7 +252,10 @@ export default function Navbar() {
           type="button"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
+          onClick={() => {
+            if (menuOpen) setActiveMobileDropdown(null);
+            setMenuOpen((open) => !open);
+          }}
           className={`ml-auto rounded-full border p-2.5 transition-colors lg:hidden ${
             isSolid
               ? "border-slate-200 text-[#092a45] hover:bg-slate-50"
@@ -260,24 +267,95 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`overflow-hidden bg-white transition-all duration-500 lg:hidden ${
+        className={`bg-white transition-all duration-500 lg:hidden ${
           menuOpen
-            ? "max-h-[calc(100vh-5rem)] border-t border-slate-100"
-            : "max-h-0"
+            ? "max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-100"
+            : "max-h-0 overflow-hidden"
         }`}
       >
         <div className="mx-auto flex max-w-[1600px] flex-col px-5 py-5 sm:px-8">
-          {navItems.map((item, index) => (
-            <a
-              key={item.label}
-              href={toHref(item.label)}
-              onClick={() => setMenuOpen(false)}
-              className="border-b border-slate-100 py-3.5 text-sm font-medium text-[#092a45] transition-colors hover:text-cyan-600"
-              style={{ transitionDelay: `${index * 25}ms` }}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isOpen = activeMobileDropdown === item.label;
+
+            if (!item.children) {
+              return (
+                <a
+                  key={item.label}
+                  href={toHref(item.label)}
+                  onClick={() => {
+                    setActiveMobileDropdown(null);
+                    setMenuOpen(false);
+                  }}
+                  className="border-b border-slate-100 py-4 text-[15px] font-semibold text-[#092a45] transition-colors hover:text-cyan-600"
+                >
+                  {item.label}
+                </a>
+              );
+            }
+
+            return (
+              <div key={item.label} className="border-b border-slate-100">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`mobile-${item.label
+                    .toLowerCase()
+                    .replaceAll(" & ", "-")
+                    .replaceAll(" ", "-")}`}
+                  onClick={() =>
+                    setActiveMobileDropdown((current) =>
+                      current === item.label ? null : item.label,
+                    )
+                  }
+                  className={`flex w-full items-center justify-between py-4 text-left text-[15px] font-semibold transition-colors ${
+                    isOpen ? "text-cyan-600" : "text-[#092a45]"
+                  }`}
+                >
+                  {item.label}
+                  <ChevronDown
+                    size={17}
+                    strokeWidth={2}
+                    className={`transition-transform duration-300 ${
+                      isOpen ? "rotate-180 text-cyan-500" : "text-slate-400"
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`mobile-${item.label
+                        .toLowerCase()
+                        .replaceAll(" & ", "-")
+                        .replaceAll(" ", "-")}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mb-3 ml-3 border-l border-cyan-200 pl-4">
+                        {item.children.map((child) => (
+                          <a
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => {
+                              setActiveMobileDropdown(null);
+                              setMenuOpen(false);
+                            }}
+                            className="flex items-center gap-3 py-2.5 text-[13px] font-medium leading-5 text-slate-600 transition-colors hover:text-cyan-600"
+                          >
+                            <span className="size-1.5 shrink-0 rounded-full bg-cyan-400/70" />
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
           <div className="flex items-center gap-3 pt-5 text-xs font-semibold text-slate-500">
             <span className="mr-1 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
               Language
