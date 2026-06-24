@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { products } from "@/data/products";
+import { smartWaterItems } from "@/data/smartWater";
 
 type NavChild = {
   label: string;
@@ -62,12 +63,11 @@ const navItems: NavItem[] = [
   },
   {
     label: "Smart Water",
-    children: sectionLinks([
-      "Remote Monitoring",
-      "AI Prediction",
-      "Predictive Maintenance",
-      "Digital Twin",
-    ]),
+    dropdownTitle: "Smart Water",
+    children: smartWaterItems.map((item) => ({
+      label: item.title,
+      href: `/smart-water/${item.slug}`,
+    })),
   },
   {
     label: "News & Insights",
