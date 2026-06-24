@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { products } from "@/data/products";
 import { smartWaterItems } from "@/data/smartWater";
+import { newsCategories } from "@/data/news";
 
 type NavChild = {
   label: string;
@@ -71,13 +73,11 @@ const navItems: NavItem[] = [
   },
   {
     label: "News & Insights",
-    children: sectionLinks([
-      "Company News",
-      "Technology",
-      "Patents & Innovation",
-      "Leadership Activities",
-      "Publications",
-    ]),
+    dropdownTitle: "News & Insights",
+    children: newsCategories.map((category) => ({
+      label: category.title,
+      href: `/news/${category.slug}`,
+    })),
   },
   { label: "About" },
   { label: "Contact" },
@@ -121,8 +121,8 @@ export default function Navbar() {
         aria-label="Main navigation"
         className="mx-auto flex h-20 max-w-[1600px] items-center gap-4 px-5 sm:px-8 lg:h-24 lg:gap-5 lg:px-6 xl:gap-8 xl:px-10"
       >
-        <a
-          href="#top"
+        <Link
+          href="/"
           aria-label="ACTION Water Solutions home"
           className="group flex shrink-0 items-center gap-2.5 text-[#092a45] xl:gap-3"
         >
@@ -142,7 +142,7 @@ export default function Navbar() {
               Water Solutions
             </span>
           </span>
-        </a>
+        </Link>
 
         <div
           className={`ml-auto hidden min-h-16 items-center gap-1 rounded-full px-4 transition-all duration-300 lg:flex xl:gap-2 xl:px-6 ${
