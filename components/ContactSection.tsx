@@ -209,7 +209,11 @@ export default function ContactSection() {
               </span>
             </div>
 
-            <form className="mt-7 grid gap-x-5 gap-y-5 sm:grid-cols-2">
+            <form
+              method="POST"
+              action="https://formspree.io/f/xdaradld"
+              className="mt-7 grid gap-x-5 gap-y-5 sm:grid-cols-2"
+            >
               <label className="text-xs font-semibold text-[#082d49]">
                 Full Name
                 <input
@@ -217,6 +221,7 @@ export default function ContactSection() {
                   name="fullName"
                   autoComplete="name"
                   placeholder="Your name"
+                  required
                   className={fieldClassName}
                 />
               </label>
@@ -237,6 +242,7 @@ export default function ContactSection() {
                   name="country"
                   autoComplete="country-name"
                   placeholder="Country or region"
+                  required
                   className={fieldClassName}
                 />
               </label>
@@ -247,6 +253,7 @@ export default function ContactSection() {
                   name="email"
                   autoComplete="email"
                   placeholder="you@company.com"
+                  required
                   className={fieldClassName}
                 />
               </label>
@@ -265,6 +272,7 @@ export default function ContactSection() {
                 <select
                   name="projectType"
                   defaultValue=""
+                  required
                   className={fieldClassName}
                 >
                   <option value="" disabled>
@@ -283,13 +291,14 @@ export default function ContactSection() {
                   name="message"
                   rows={6}
                   placeholder="Tell us about your project requirements, location, capacity, or timeline."
+                  required
                   className={`${fieldClassName} resize-none`}
                 />
               </label>
 
               <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
                 <button
-                  type="button"
+                  type="submit"
                   className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#082d49] px-7 py-4 text-sm font-bold text-white shadow-[0_12px_30px_rgba(8,45,73,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0b3b5e]"
                 >
                   Request Consultation
