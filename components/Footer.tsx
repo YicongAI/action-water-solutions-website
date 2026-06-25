@@ -6,8 +6,8 @@ const quickLinks = [
   { label: "Products", href: "#products" },
   { label: "Smart Water", href: "#smart-water" },
   { label: "News & Insights", href: "#news-insights" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Footer() {

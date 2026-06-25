@@ -16,6 +16,7 @@ type NavChild = {
 
 type NavItem = {
   label: string;
+  href?: string;
   dropdownTitle?: string;
   children?: NavChild[];
 };
@@ -23,20 +24,7 @@ type NavItem = {
 const toHref = (label: string) =>
   `#${label.toLowerCase().replaceAll(" & ", "-").replaceAll(" ", "-")}`;
 
-const sectionLinks = (labels: string[]): NavChild[] =>
-  labels.map((label) => ({ label, href: toHref(label) }));
-
 const navItems: NavItem[] = [
-  {
-    label: "Solutions",
-    children: sectionLinks([
-      "Municipal Water Supply",
-      "Rural Water Supply",
-      "Wastewater Treatment",
-      "Industrial Water Treatment",
-      "Smart Water Solutions",
-    ]),
-  },
   {
     label: "Projects",
     dropdownTitle: "Projects",
@@ -79,8 +67,8 @@ const navItems: NavItem[] = [
       href: `/news/${category.slug}`,
     })),
   },
-  { label: "About" },
-  { label: "Contact" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -170,7 +158,7 @@ export default function Navbar() {
                 }}
               >
                 <a
-                  href={toHref(item.label)}
+                  href={item.href ?? toHref(item.label)}
                   aria-haspopup={item.children ? "menu" : undefined}
                   aria-expanded={item.children ? isOpen : undefined}
                   className={`group flex items-center gap-1 px-2 py-5 text-[11px] font-semibold whitespace-nowrap text-[#092a45] transition-colors duration-200 hover:text-cyan-600 xl:px-2.5 xl:text-[13px] 2xl:px-3 2xl:text-sm ${
@@ -281,7 +269,7 @@ export default function Navbar() {
               return (
                 <a
                   key={item.label}
-                  href={toHref(item.label)}
+                  href={item.href ?? toHref(item.label)}
                   onClick={() => {
                     setActiveMobileDropdown(null);
                     setMenuOpen(false);
