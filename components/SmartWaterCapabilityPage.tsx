@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -11,6 +12,7 @@ import {
   Cloud,
   Database,
   Factory,
+  MapPin,
   MonitorCog,
   Network,
   RadioTower,
@@ -244,6 +246,101 @@ export default function SmartWaterCapabilityPage({
           </motion.div>
         </div>
       </section>
+
+      {item.relatedProjects && item.relatedProjects.length > 0 && (
+        <section className="relative overflow-hidden bg-[#061f34] px-5 py-20 text-white sm:px-8 lg:px-10 lg:py-24">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_30%,rgba(34,211,238,0.1),transparent_30%)]" />
+          <div className="pointer-events-none absolute inset-0 opacity-[0.1] [background-image:linear-gradient(rgba(255,255,255,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.08)_1px,transparent_1px)] [background-size:80px_80px]" />
+
+          <div className="relative mx-auto max-w-[1440px]">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ staggerChildren: 0.1 }}
+            >
+              <motion.div
+                variants={fadeUp}
+                className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300"
+              >
+                Applied Capability
+              </motion.div>
+              <motion.h2
+                variants={fadeUp}
+                className="mt-4 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl"
+              >
+                Related Smart Water Applications
+              </motion.h2>
+              <motion.p
+                variants={fadeUp}
+                className="mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base"
+              >
+                Practical examples connecting monitoring, automation, and
+                operational support with water treatment infrastructure.
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{ staggerChildren: 0.1, delayChildren: 0.1 }}
+              className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+            >
+              {item.relatedProjects.map((project) => (
+                <motion.article
+                  key={project.title}
+                  variants={fadeUp}
+                  transition={{ duration: 0.6 }}
+                  whileHover={{ y: -6 }}
+                  className="group overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.05] shadow-[0_20px_55px_rgba(0,0,0,0.2)] backdrop-blur-sm"
+                >
+                  <div className="relative h-64 overflow-hidden bg-[linear-gradient(135deg,#082d49_0%,#0a536f_58%,#087f98_100%)]">
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:42px_42px]" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#041a2c]/80 via-transparent to-[#061f34]/15" />
+                    <span className="absolute left-5 top-5 rounded-full border border-cyan-200/20 bg-[#061f34]/75 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-cyan-200 backdrop-blur-sm">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  <div className="p-6 sm:p-7">
+                    <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+                      <MapPin size={13} className="text-cyan-400" />
+                      {project.location}
+                    </div>
+                    <h3 className="mt-4 text-2xl font-semibold leading-tight tracking-[-0.03em]">
+                      {project.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-slate-400">
+                      {project.description}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-cyan-300/15 bg-cyan-400/[0.07] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-cyan-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       <section className="bg-white px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="mx-auto max-w-[1440px]">

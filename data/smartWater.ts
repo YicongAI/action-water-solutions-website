@@ -9,6 +9,16 @@ export type SmartWaterItem = {
   architectureSteps: string[];
   status: string;
   image: string | null;
+  relatedProjects?: SmartWaterRelatedProject[];
+};
+
+export type SmartWaterRelatedProject = {
+  title: string;
+  category: string;
+  location: string;
+  description: string;
+  image: string | null;
+  tags: string[];
 };
 
 export const smartWaterItems: SmartWaterItem[] = [
@@ -41,6 +51,17 @@ export const smartWaterItems: SmartWaterItem[] = [
     ],
     status: "Available / Expandable",
     image: null,
+    relatedProjects: [
+      {
+        title: "Smart Water Operations System",
+        category: "Remote Monitoring",
+        location: "Guangxi, China",
+        description:
+          "Intelligent monitoring and automation system supporting remote operation and efficient management of water treatment facilities.",
+        image: "/projects/smart-water-system1.png",
+        tags: ["Smart Operations", "Remote Monitoring", "Automation"],
+      },
+    ],
   },
   {
     slug: "ai-prediction",
